@@ -57,3 +57,31 @@ const Bulb = () => {
     )
 }
 
+const TempConverter = () => {
+
+  const [grades, setGrades] = useState(0);
+
+  const toRadian = (grades) => {
+
+      const input = grades.target.value; 
+
+      return setGrades(input * 0.01745);
+  }
+
+  const toGrades = (radians) => {
+
+      const input2 = radians.target.value;
+
+      return setGrades(input2 * 57.296);
+  }
+
+  return (
+      <div>
+          <p>Set Degrees</p>
+          <input placeholder={grades} onChange={toRadian}/>
+          <p>Set Radians</p>
+          <input placeholder={grades} onChange={toGrades}/>
+      </div>
+  )
+
+}
