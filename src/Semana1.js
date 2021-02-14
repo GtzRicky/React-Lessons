@@ -1,3 +1,6 @@
+/* Contador con incremento */
+
+
 const Counter = () => {
     const [counter, setCounter] = useState(0);
   
@@ -12,7 +15,11 @@ const Counter = () => {
       </div>
     )
 }
+
+
+/* Calculadora de temperatura de ebullición */
   
+
 const BoilingWater = () => {
   
     const [isBoiling, setBoiling] = useState(false);
@@ -37,10 +44,9 @@ const BoilingWater = () => {
       </div>
     )
 }
-  
 
 
-
+/* Bombilla que prende y apaga */
 
 
 const Bulb = () => {
@@ -56,6 +62,10 @@ const Bulb = () => {
       </div>
     )
 }
+
+
+/* Convertidor de grados a Radianes */
+
 
 const TempConverter = () => {
 
