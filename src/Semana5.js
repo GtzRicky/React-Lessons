@@ -183,3 +183,148 @@ return (
         </Switch>
     </div>
 )
+
+/******************** CONTINUACIÓN CLASE MARTES 23 ***************/
+
+import './App.css';
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import Topics from "./components/comp";
+import Layout from './components/Layout';
+
+
+function App() {
+
+  return (
+    <div className="App">
+      <Router>
+        <Switch>
+
+          {/* Estas son las tres formas de hacer las rutas: en una sola linea con render,
+            con un componente importado y la forma tradicional -usada en caso que el route tenga un componente hijo */}
+
+          <Route exact path="/" render={() => <Layout><p>Esta es mi ruta Home</p></Layout>} /> 
+          <Route path="/topics" component={Topics}/>
+          <Route path="/about">
+              <Layout><p>Este es about y quiero ver mi ruta</p></Layout>
+          </Route>
+          <Route path="*">
+            Error 404 Not Found
+          </Route>
+        </Switch>
+        
+      </Router>
+    </div>
+  );
+}
+
+export default App;
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const Layout = ({children}) => {
+    return (
+        <div style={{display: 'flex'}}>
+            <div style={{ flexBasis: 200 }}>
+                <ul>
+                    <li>
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/about">About</Link>
+                    </li>
+                    <li>
+                        <Link to="/topics">Topics</Link>
+                    </li>
+                </ul>
+            </div>
+            <div style={{flex: 1}}>
+                {children}
+            </div>            
+        </div>
+    )
+}
+
+export default Layout
+
+import React from 'react';
+import Layout from './Layout';
+import { Link, useRouteMatch, Switch, Route, useParams } from 'react-router-dom';
+
+const Topic = () => {
+    let { topicId } = useParams();
+    return <p>Este es mi tema {topicId}</p>
+}
+
+const getDataFromAPI = [
+    {
+        topic: "react",
+        title: "Learn React"
+    },
+    {
+        topic: "redux",
+        title: "Learn Redux"
+    },
+    {
+        topic: "router",
+        title: "Learn React-router"
+    },
+    {
+        topic: "unity",
+        title: "Learn Unity"
+    }
+];
+ 
+const Topics = () => {
+    let { path, url } = useRouteMatch();
+    return (
+        <Layout>
+            <ul>
+                {getDataFromAPI.map((value) => <li><Link to={`${url}/${value.topic}`}>{value.title}</Link></li>)}
+            </ul>
+
+            <Switch>
+                <Route exact path={`${path}`}>
+                    Esta es mi ruta Topics
+                </Route>
+                <Route path={`${path}/:topicId`} component={Topic}/>  
+                
+                {/* Usando el hook useParams se crea un 
+                    componente dinámico en lugar de crear una ruta por cada tema*/}
+            </Switch>
+        </Layout>
+    )
+};
+
+export default Topics
+
+
+
+/******************** EJERCICIO CLASE MARTES 23 **********************/
+
+import './App.css';
+import PostContainer from './components/PostContainer'
+
+
+
+function App() {
+
+  return (
+    <div className="App">
+      <h1>El increíble blog de Bender el Robot</h1>
+      <img src="https://memegenerator.net/img/images/5906307.jpg" alt="bender-blog"/>
+      <PostContainer />
+    </div>
+  );
+}
+
+export default App;
+
+/********* COMPONENTES
+
+/*********** POSTCONTAINER, POSTLIST, POSTDETAILS **********/
+
