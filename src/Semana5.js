@@ -328,3 +328,49 @@ export default App;
 
 /*********** POSTCONTAINER, POSTLIST, POSTDETAILS **********/
 
+/********************* CLASE MIÉRCOLES 24 ***********/
+
+const PrivateRoute = ({ children, ...props }) => {
+    let auth = useAuth();
+    
+    return (
+      <Route
+        {...props}
+        render={({ location }) =>
+          auth.user ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: location },
+              }}
+            />
+          )
+        }
+      />
+    );
+}
+
+/* Todos los componentes tiene una prop 'children', que se renderiza dentro del componente, ya sea usando etiquetas de
+apertura y cierre, o usando etiqueta de una sola línea */
+
+const TieneChildren = ({ children }) => {
+    return (
+      <div>
+        Estoy renderizando mi componente TieneChildren <br />
+        { children }
+      </div>
+    )
+}
+  
+function App() {
+    return (
+        <div className="App">
+        <TieneChildren children={"Yo soy el HIJO"}/>
+        <TieneChildren>
+            Yo soy el HIjo
+        </TieneChildren>
+        </div>
+    );
+}
